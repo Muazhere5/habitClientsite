@@ -1,7 +1,7 @@
-// CRITICAL: .cjs extension enables this CommonJS syntax to resolve Tailwind
+// postcss.config.cjs
 module.exports = {
   plugins: [
-    require('tailwindcss'), 
-    require('autoprefixer'), 
+    require('@tailwindcss/postcss'),
+    require('autoprefixer'),
   ],
 };

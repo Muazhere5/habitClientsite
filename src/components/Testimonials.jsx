@@ -2,8 +2,8 @@ import React from 'react';
 import { FaQuoteLeft } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 // Import dummy profile image
-import ProfileOne from '../assets/profile_1.jpg'; // [Image: profile_1.jpg]
-import ProfileTwo from '../assets/profile_2.jpg'; // [Image: profile_2.jpg]
+//import ProfileOne from '../assets/profile_1.jpg'; // [Image: profile_1.jpg]
+//import ProfileTwo from '../assets/profile_2.jpg'; // [Image: profile_2.jpg]
 
 const testimonialData = [
     { 

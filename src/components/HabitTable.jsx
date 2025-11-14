@@ -1,5 +1,5 @@
 import React from 'react';
-import { calculateCurrentStreak } from '../utils/streakCalculator'; 
+//import { calculateCurrentStreak } from '../utils/streakCalculator'; 
 import { FaEdit, FaTrash, FaCheckCircle, FaFire } from 'react-icons/fa';
 import useAxios from '../utils/useAxios';
 import toast from 'react-hot-toast';

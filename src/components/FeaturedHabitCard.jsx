@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaFire } from 'react-icons/fa';
-import HabitPlaceholder from '../assets/habit_placeholder.jpg'; // [Image: habit_placeholder.jpg]
+//import HabitPlaceholder from '../assets/habit_placeholder.jpg'; // [Image: habit_placeholder.jpg]
 
 const FeaturedHabitCard = ({ habit }) => {
     // ⬇️ Backend Data Usage: Accessing habit data directly from the MongoDB document.

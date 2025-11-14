@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import useAxios from '../utils/useAxios';
 import { AuthContext } from '../providers/AuthProvider';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { calculateCurrentStreak } from '../utils/streakCalculator'; // Assumes utility is created
+
 import { FaFire, FaCheckCircle } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
