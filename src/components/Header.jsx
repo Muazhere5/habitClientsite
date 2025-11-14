@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import toast from 'react-hot-toast';
 // ⬇️ Image Import: Default Avatar (Assuming you've added this file)
-import DefaultAvatar from '../assets/default_avatar.png'; // [Image: default_avatar.png]
+//import DefaultAvatar from '../assets/default_avatar.png'; // [Image: default_avatar.png]
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
