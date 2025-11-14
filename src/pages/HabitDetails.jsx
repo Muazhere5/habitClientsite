@@ -4,6 +4,9 @@ import useAxios from '../utils/useAxios';
 import { AuthContext } from '../providers/AuthProvider';
 import LoadingSpinner from '../components/LoadingSpinner';
 
+// ⬇️ CRITICAL FIX: Importing the streak calculator from utils
+import { calculateCurrentStreak } from '../utils/streakCalculator'; 
+
 import { FaFire, FaCheckCircle } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
@@ -28,6 +31,7 @@ const HabitDetails = () => {
                     return;
                 }
                 setHabit(res.data);
+                // ⬇️ FUNCTION CALL: Uses imported utility to calculate streak
                 setCurrentStreak(calculateCurrentStreak(res.data.completionHistory));
                 setLoading(false);
             })
@@ -142,7 +146,7 @@ const HabitDetails = () => {
                         {/* Mark Complete Button */}
                         <button 
                             onClick={handleMarkComplete} 
-                            className="btn btn-lg btn-success text-white w-full"
+                            className="btn btn-lg btn-success  text-white w-full"
                         >
                             <FaCheckCircle className="text-xl" /> Mark Complete Today
                         </button>

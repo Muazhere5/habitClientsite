@@ -1,21 +1,23 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
+
   theme: {
     extend: {
-        colors: {
-            'habit-primary': '#4f46e5', // Custom color definition
-        },
+      colors: {
+        'habit-primary': '#4f46e5',
+      },
     },
   },
+
   plugins: [
-    require("daisyui"), 
+    require("daisyui"),
   ],
-  
+
   daisyui: {
     themes: ["light", "dark", "cupcake", "valentine", "aqua"],
   },
-}
+};

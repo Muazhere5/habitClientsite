@@ -1,28 +1,33 @@
 import React from 'react';
 import { FaQuoteLeft } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-// Import dummy profile image
-//import ProfileOne from '../assets/profile_1.jpg'; // [Image: profile_1.jpg]
-//import ProfileTwo from '../assets/profile_2.jpg'; // [Image: profile_2.jpg]
+
+// ⬇️ LOCAL IMAGE IMPORTS (Keep commented out until local files are saved)
+// import ProfileOne from '../assets/profile_1.jpg'; // [Image: profile_1.jpg]
+// import ProfileTwo from '../assets/profile_2.jpg'; // [Image: profile_2.jpg]
+
+// ⬇️ DEMO URL PICTURES for Avatars (Replaces local imports for easy startup)
+const AVATAR_URL_1 = 'https://i.pravatar.cc/150?img=1'; 
+const AVATAR_URL_2 = 'https://i.pravatar.cc/150?img=6'; 
 
 const testimonialData = [
     { 
         quote: "Since tracking my 'Deep Work' habit here, my focus time has doubled. This app is simple and effective.", 
         name: "Jessica P.", 
         habit: "Deep Work Sprint",
-        avatar: ProfileOne
+        avatar: AVATAR_URL_1 // Using Demo URL 1
     },
     { 
         quote: "The streak counter is the motivation I never knew I needed! It pushed me to hit my 100th day of exercise.", 
         name: "Mark T.", 
         habit: "Resistance Training",
-        avatar: ProfileTwo 
+        avatar: AVATAR_URL_2 // Using Demo URL 2
     },
     { 
         quote: "Easy to use and the Mark Complete feature updates instantly. My mornings are completely transformed!", 
         name: "Sofia A.", 
         habit: "Mindful Morning Stretch",
-        avatar: ProfileOne 
+        avatar: AVATAR_URL_1 // Using Demo URL 1
     },
 ];
 
@@ -45,9 +50,14 @@ const Testimonials = () => {
                         <FaQuoteLeft className="text-3xl text-habit-primary/30 mb-4" />
                         <p className="italic text-gray-700 flex-grow mb-4">"{t.quote}"</p>
                         <div className="mt-4 border-t pt-3 flex items-center">
-                            <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full mr-3 object-cover" />
+                            {/* ⬇️ Image Usage: Uses the avatar URL from the testimonial data (demo URL) */}
+                            <img 
+                                src={t.avatar} 
+                                alt={t.name} 
+                                className="w-12 h-12 rounded-full mr-3 object-cover shadow" 
+                            />
                             <div>
-                                <p className="font-semibold">{t.name}</p>
+                                <p className="font-semibold text-gray-800">{t.name}</p>
                                 <p className="text-sm text-habit-secondary">{t.habit}</p>
                             </div>
                         </div>

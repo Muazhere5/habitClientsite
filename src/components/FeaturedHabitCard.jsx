@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaFire } from 'react-icons/fa';
-//import HabitPlaceholder from '../assets/habit_placeholder.jpg'; // [Image: habit_placeholder.jpg]
+import HabitPlaceholder from '../assets/habit5.png';
 
 const FeaturedHabitCard = ({ habit }) => {
-    // ⬇️ Backend Data Usage: Accessing habit data directly from the MongoDB document.
     const hasHistory = habit.completionHistory && habit.completionHistory.length > 0;
-    
+
     return (
         <div className="card bg-base-100 shadow-xl overflow-hidden h-full flex flex-col hover:shadow-2xl transition-shadow duration-300">
             <figure>
@@ -27,22 +26,24 @@ const FeaturedHabitCard = ({ habit }) => {
                         </div>
                     )}
                 </div>
-                
+
                 <p className="text-sm text-gray-600 mb-2">
                     {habit.description.substring(0, 90)}{habit.description.length > 90 ? '...' : ''}
                 </p>
-                
+
                 <div className="badge badge-outline badge-sm mb-4">
                     Category: {habit.category}
                 </div>
+
                 <div className="text-xs text-gray-500">
-                    {/* ⬇️ Backend Data Usage: Displaying Creator Info */}
                     Created by: **{habit.creatorName}**
                 </div>
 
                 <div className="card-actions justify-end mt-4">
-                    {/* ⬇️ Backend Link: Uses habit._id (MongoDB ID) for linking to details page */}
-                    <Link to={`/habit/${habit._id}`} className="btn btn-primary btn-sm">
+                    <Link
+                        to={`/habit/${habit._id}`}
+                        className="btn btn-primary btn-sm text-white"
+                    >
                         View Details
                     </Link>
                 </div>

@@ -11,6 +11,8 @@ const BrowsePublicHabits = () => {
     const [publicHabits, setPublicHabits] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [searchInput, setSearchInput] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
 
     // Fetch data based on current filter/search state
@@ -38,12 +40,36 @@ const BrowsePublicHabits = () => {
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
-        const input = e.target.search.value;
+        const input = searchInput.trim();
         setSearchTerm(input);
+        setSuggestions([]);
+    };
+
+    const handleSearchChange = (e) => {
+        const value = e.target.value;
+        setSearchInput(value);
+
+        if (!value.trim()) {
+            setSuggestions([]);
+            return;
+        }
+
+        const lower = value.toLowerCase();
+        const matched = publicHabits
+            .filter(habit => habit.title && habit.title.toLowerCase().includes(lower))
+            .slice(0, 5);
+
+        setSuggestions(matched);
     };
     
     const handleCategoryChange = (e) => {
         setSelectedCategory(e.target.value);
+    };
+
+    const handleSuggestionClick = (title) => {
+        setSearchInput(title);
+        setSearchTerm(title);
+        setSuggestions([]);
     };
 
     if (loading) {
@@ -56,43 +82,71 @@ const BrowsePublicHabits = () => {
                 Browse All Public Habits
             </h1>
             
-            {/* Search and Filter Controls (Consistent styling with shadow-2xl) */}
+            {/* Search and Filter Controls */}
             <motion.div 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-8 p-6 bg-base-100 shadow-2xl rounded-xl flex flex-col md:flex-row gap-4 justify-between items-center"
+                className="mb-8 p-6 bg-base-100 shadow-2xl rounded-xl"
             >
-                {/* Search Bar */}
-                <form onSubmit={handleSearchSubmit} className="form-control w-full md:w-1/2">
-                    <div className="input-group">
-                        <input 
-                            type="text" 
-                            name="search"
-                            placeholder="Search by title or keyword..." 
-                            className="input input-bordered w-full"
-                        />
-                        <button type="submit" className="btn btn-primary">Search</button>
+                <form onSubmit={handleSearchSubmit} className="w-full">
+                    <div className="flex flex-row flex-wrap gap-4 items-center">
+                        
+                        {/* Search Input + Button */}
+                        <div className="relative flex-[2] min-w-[260px]">
+                            <div className="flex w-full gap-2 items-center">
+                                <input 
+                                    type="text" 
+                                    name="search"
+                                    value={searchInput}
+                                    onChange={handleSearchChange}
+                                    placeholder="Search by title or keyword..." 
+                                    className="input input-bordered bg-blue-50 border-2 border-blue-300 text-black h-10 text-sm max-w-xs w-full"
+                                />
+                                <button 
+                                    type="submit" 
+                                    className="btn bg-blue-700 text-white hover:bg-blue-800 border-none h-10 px-6 text-sm md:text-base"
+                                >
+                                    Search
+                                </button>
+                            </div>
+
+                            {/* Suggestions */}
+                            {suggestions.length > 0 && searchInput.trim() && (
+                                <ul className="absolute z-20 mt-1 w-full bg-base-100 border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto">
+                                    {suggestions.map(s => (
+                                        <li
+                                            key={s._id}
+                                            className="px-3 py-2 cursor-pointer hover:bg-blue-50"
+                                            onClick={() => handleSuggestionClick(s.title)}
+                                        >
+                                            {s.title}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+
+                        {/* Category Filter (smaller box now) */}
+                        <div className="form-control flex-[0.5] min-w-[140px]">
+                            <label className="label hidden md:block">
+                                <span className="label-text font-semibold">Filter:</span>
+                            </label>
+                            <select 
+                                className="select select-bordered bg-blue-50 border-blue-300 text-black h-10 text-sm"
+                                value={selectedCategory}
+                                onChange={handleCategoryChange}
+                            >
+                                {categories.map(cat => (
+                                    <option key={cat} value={cat}>{cat}</option>
+                                ))}
+                            </select>
+                        </div>
+
                     </div>
                 </form>
-
-                {/* Category Filter */}
-                <div className="form-control w-full md:w-1/4">
-                    <label className="label hidden md:block">
-                        <span className="label-text font-semibold">Filter by Category:</span>
-                    </label>
-                    <select 
-                        className="select select-bordered"
-                        value={selectedCategory}
-                        onChange={handleCategoryChange}
-                    >
-                        {categories.map(cat => (
-                            <option key={cat} value={cat}>{cat}</option>
-                        ))}
-                    </select>
-                </div>
             </motion.div>
 
-            {/* Habit Grid Display */}
+            {/* Habit Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {publicHabits.length > 0 ? (
                     publicHabits.map(habit => (
