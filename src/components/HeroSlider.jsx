@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../providers/AuthProvider'; // Import AuthContext
 
 import slideImage1 from '../assets/habit1.png';
 import slideImage2 from '../assets/habit2.png';
@@ -12,25 +13,21 @@ const slides = [
         title: "Small Steps Every Day → Big Results",
         text: "Habits are the compound interest of self-improvement. Start small, be consistent.",
         url: slideImage1,
-        link: "/add-habit"
     },
     {
         title: "Build Consistency, Build Success",
         text: "Don't aim for perfection; aim for consistency. The repetition is where the magic happens.",
         url: slideImage2,
-        link: "/my-habits"
     },
     {
         title: "Your Future Self Will Thank You",
         text: "Every 'Mark Complete' button press is a vote for the person you want to become.",
         url: slideImage3,
-        link: "/browse-public-habits"
     },
     {
         title: "Focus on the Process, Not the Outcome",
         text: "The system is the master. Your daily routine determines your success over time.",
         url: slideImage4,
-        link: "/add-habit"
     }
 ];
 
@@ -40,9 +37,15 @@ const sliderVariants = {
 };
 
 const HeroSlider = () => {
+    const { user } = useContext(AuthContext); // Access user context
     const [current, setCurrent] = useState(0);
 
+    // Determine the destination based on login status
+    // If user is logged in, go to /add-habit; otherwise, go to /login.
+    const destinationPath = user ? "/add-habit" : "/login"; 
+
     useEffect(() => {
+        // Auto slide interval
         const interval = setInterval(() => {
             setCurrent(prev => (prev + 1) % slides.length);
         }, 5000);
@@ -91,9 +94,9 @@ const HeroSlider = () => {
                                 {slide.text}
                             </p>
 
-                            {/* BUTTON USING SAME COLOR AS 'View Details': #570DF8 */}
+                            {/* CRITICAL FIX: Link now uses the conditional destinationPath */}
                             <Link
-                                to={slide.link}
+                                to={destinationPath}
                                 className="mt-6 btn btn-lg shadow-xl 
                                 bg-[#570DF8] hover:bg-[#4403C7] text-white border-none"
                             >

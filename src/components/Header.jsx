@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import toast from 'react-hot-toast';
-// ⬇️ Image Import: Default Avatar (Assuming you've added this file)
-//import DefaultAvatar from '../assets/default_avatar.png'; // [Image: default_avatar.png]
+// ⬇️ Placeholder Avatar Image
+import DefaultAvatar from '../assets/habit6.png';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -33,13 +33,16 @@ const Header = () => {
                 {/* Mobile Menu Dropdown */}
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-2xl bg-base-100 rounded-box w-52">
                         {navLinks}
                     </ul>
                 </div>
-                {/* Logo/Website Name (Consistent Heading Style) */}
+
+                {/* Logo */}
                 <Link to="/" className="btn btn-ghost text-2xl font-extrabold text-habit-primary">
                     🔥 Habit Tracker
                 </Link>
@@ -52,33 +55,46 @@ const Header = () => {
                 </ul>
             </div>
 
-            {/* Conditional Login/User Section */}
+            {/* User / Login Section */}
             <div className="navbar-end">
                 {user ? (
-                    // User is logged in: Show Avatar and Dropdown
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                {/* ⬇️ Image Usage: Displaying user photo or default */}
                                 <img 
                                     alt={user.displayName || "User Avatar"} 
                                     src={user.photoURL || DefaultAvatar} 
                                 />
                             </div>
                         </div>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-2xl bg-base-100 rounded-box w-52">
-                            {/* Display Name and Email requirement */}
-                            <li className="font-semibold text-sm px-4 py-2 pointer-events-none text-gray-700">
+
+                        {/* USER DROPDOWN */}
+                        <ul
+                            tabIndex={0}
+                            className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-2xl rounded-box w-56"
+                            style={{ backgroundColor: '#1A56DB', color: 'white' }}
+                        >
+                            {/* Name */}
+                            <li className="font-semibold text-sm px-2 py-1 pointer-events-none">
                                 {user.displayName || 'User'}
                             </li>
-                            <li className="text-xs px-4 py-2 pointer-events-none text-gray-500">
+
+                            {/* Email */}
+                            <li className="text-xs px-2 py-1 pointer-events-none opacity-80">
                                 {user.email}
                             </li>
-                            <div className="divider my-0"></div>
+
+                            <div className="divider my-2 border-opacity-30"></div>
+
+                            {/* LOGOUT BUTTON → updated with BLACK BORDER */}
                             <li>
                                 <button 
-                                    onClick={handleLogOut} 
-                                    className="btn btn-sm btn-error text-white mt-1 w-full"
+                                    onClick={handleLogOut}
+                                    className="btn btn-sm w-full text-white font-semibold"
+                                    style={{
+                                        backgroundColor: '#1A56DB',
+                                        border: '2px solid black'   // ⬅️ ADDED BLACK BORDER
+                                    }}
                                 >
                                     Log out
                                 </button>
@@ -86,7 +102,6 @@ const Header = () => {
                         </ul>
                     </div>
                 ) : (
-                    // User is NOT logged in: Show Login/Signup buttons (Consistent Button Style)
                     <>
                         <Link to="/login" className="btn btn-sm btn-ghost hover:bg-base-200">Login</Link>
                         <Link to="/signup" className="btn btn-sm btn-primary text-white ml-2">Signup</Link>
