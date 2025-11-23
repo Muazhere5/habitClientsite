@@ -80,7 +80,7 @@ const Register = () => {
                         Create Your Account
                     </h2>
                     
-                    {/* Name */}
+                    
                     <div className="form-control mb-5">
                         <div className="mb-2">
                             <label className="label">
@@ -98,7 +98,7 @@ const Register = () => {
                         </div>
                     </div>
 
-                    {/* Email */}
+                    
                     <div className="form-control mb-5">
                         <div className="mb-2">
                             <label className="label">
@@ -116,7 +116,7 @@ const Register = () => {
                         </div>
                     </div>
 
-                    {/* Photo URL */}
+                    
                     <div className="form-control mb-5">
                         <div className="mb-2">
                             <label className="label">
@@ -133,7 +133,7 @@ const Register = () => {
                         </div>
                     </div>
 
-                    {/* Password */}
+                    
                     <div className="form-control mb-3">
                         <div className="mb-2">
                             <label className="label">
@@ -154,12 +154,12 @@ const Register = () => {
                         </p>
                     </div>
                     
-                    {/* Error Display */}
+                    
                     {registerError && (
                         <p className="text-error text-center mt-3">{registerError}</p>
                     )}
 
-                    {/* Submit Button */}
+                    
                     <div className="form-control mt-6">
                         <button
                             type="submit"
@@ -169,7 +169,7 @@ const Register = () => {
                         </button>
                     </div>
                     
-                    {/* Divider and Google Login */}
+                    
                     <div className="divider">OR</div>
                     <div className="form-control">
                         <button
@@ -181,7 +181,7 @@ const Register = () => {
                         </button>
                     </div>
                     
-                    {/* Link to Login Page */}
+                    
                     <p className="text-center mt-4 text-sm">
                         Already have an account?{" "}
                         <Link

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../providers/AuthProvider'; // Import AuthContext
+import { AuthContext } from '../providers/AuthProvider'; 
 
 import slideImage1 from '../assets/habit1.png';
 import slideImage2 from '../assets/habit2.png';
@@ -37,15 +37,15 @@ const sliderVariants = {
 };
 
 const HeroSlider = () => {
-    const { user } = useContext(AuthContext); // Access user context
+    const { user } = useContext(AuthContext); 
     const [current, setCurrent] = useState(0);
 
-    // Determine the destination based on login status
-    // If user is logged in, go to /add-habit; otherwise, go to /login.
+    
+    
     const destinationPath = user ? "/add-habit" : "/login"; 
 
     useEffect(() => {
-        // Auto slide interval
+       
         const interval = setInterval(() => {
             setCurrent(prev => (prev + 1) % slides.length);
         }, 5000);
@@ -94,7 +94,7 @@ const HeroSlider = () => {
                                 {slide.text}
                             </p>
 
-                            {/* CRITICAL FIX: Link now uses the conditional destinationPath */}
+                            
                             <Link
                                 to={destinationPath}
                                 className="mt-6 btn btn-lg shadow-xl 

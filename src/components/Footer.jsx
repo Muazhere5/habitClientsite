@@ -13,12 +13,12 @@ const Footer = () => {
             text-white
             bg-[#0D1B45] 
         ">
-            {/* Background gradient overlay */}
+            
             <div className="absolute inset-0 bg-gradient-to-br from-[#10235A] via-[#0D1B45] to-[#0A1636] opacity-95 pointer-events-none"></div>
 
             <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
 
-                {/* Brand Section */}
+                
                 <aside className="space-y-3">
                     <span className="text-3xl font-extrabold tracking-wide drop-shadow-sm text-[#1A56DB]">
                         🔥 Habit Tracker
@@ -34,7 +34,7 @@ const Footer = () => {
                     </p>
                 </aside>
 
-                {/* Contact Section */}
+                
                 <nav className="space-y-5">
                     <h6 className="text-xl font-semibold relative text-white">
                         Contact & Legal
@@ -60,7 +60,7 @@ const Footer = () => {
                     </ul>
                 </nav>
 
-                {/* Social Section */}
+               
                 <nav className="space-y-5">
                     <h6 className="text-xl font-semibold relative text-white">
                         Social

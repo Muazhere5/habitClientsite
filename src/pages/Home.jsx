@@ -15,7 +15,7 @@ const Home = () => {
 
     useEffect(() => {
         setLoading(true);
-        // Fetch 6 newest public habits from the server
+        
         axiosInstance.get('/featured-habits')
             .then(res => {
                 setFeaturedHabits(res.data);
@@ -31,7 +31,7 @@ const Home = () => {
         return <LoadingSpinner />;
     }
 
-    // Animation Variants for Framer Motion entrance (consistent animation across sections)
+    
     const sectionVariants = {
         hidden: { opacity: 0, y: 50 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
@@ -40,7 +40,7 @@ const Home = () => {
     return (
         <div className="container mx-auto px-4 py-8 max-w-7xl">
             
-            {/* 1. Hero Banner / Slider */}
+            
             <motion.section
                 initial="hidden"
                 animate="visible"
@@ -50,7 +50,7 @@ const Home = () => {
                 <HeroSlider />
             </motion.section>
 
-            {/* 2. Featured Habits Section */}
+            
             <motion.section
                 initial="hidden"
                 whileInView="visible"
@@ -61,7 +61,7 @@ const Home = () => {
                 <FeaturedHabits habits={featuredHabits} />
             </motion.section>
 
-            {/* 3. Why Build Habits Section */}
+            
             <motion.section
                 initial="hidden"
                 whileInView="visible"
@@ -72,7 +72,7 @@ const Home = () => {
                 <WhyBuildHabits />
             </motion.section>
 
-            {/* 4. Extra Section 1: Testimonials */}
+            
             <motion.section
                 initial="hidden"
                 whileInView="visible"
@@ -83,7 +83,7 @@ const Home = () => {
                 <Testimonials />
             </motion.section>
             
-            {/* 5. Extra Section 2: Daily Motivation */}
+            
             <motion.section
                 initial="hidden"
                 whileInView="visible"

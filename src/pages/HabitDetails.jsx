@@ -4,14 +4,14 @@ import useAxios from '../utils/useAxios';
 import { AuthContext } from '../providers/AuthProvider';
 import LoadingSpinner from '../components/LoadingSpinner';
 
-// ⬇️ CRITICAL FIX: Importing the streak calculator from utils
+
 import { calculateCurrentStreak } from '../utils/streakCalculator'; 
 
 import { FaFire, FaCheckCircle } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
 
-// ⬇️ Recharts imports for streak graph
+
 import {
     ResponsiveContainer,
     AreaChart,
@@ -42,7 +42,7 @@ const HabitDetails = () => {
                     return;
                 }
                 setHabit(res.data);
-                // ⬇️ FUNCTION CALL: Uses imported utility to calculate streak
+               
                 setCurrentStreak(calculateCurrentStreak(res.data.completionHistory));
                 setLoading(false);
             })
@@ -69,7 +69,7 @@ const HabitDetails = () => {
                     toast('You already marked this habit complete today!', { icon: '👏' });
                 } else if (res.data.acknowledged) {
                     toast.success('Task Completed! Keep the streak going!');
-                    fetchHabitDetails(); // Refresh data instantly
+                    fetchHabitDetails(); 
                 }
             })
             .catch(error => {
@@ -78,7 +78,7 @@ const HabitDetails = () => {
             });
     };
     
-    // Logic for Progress Bar (% of days completed in last 30)
+    
     const calculateProgressPercentage = (history) => {
         if (!history || history.length === 0) return 0;
         
@@ -92,10 +92,10 @@ const HabitDetails = () => {
                 .map(date => date.toISOString().split('T')[0])
         ).size;
 
-        return Math.min(100, Math.round((uniqueCompletedDays / 30) * 100)); // Cap at 100%
+        return Math.min(100, Math.round((uniqueCompletedDays / 30) * 100)); 
     };
 
-    // ⬇️ Build data for streak graph (last 30 days, cumulative streak)
+    
     const buildStreakChartData = (history = []) => {
         if (!Array.isArray(history)) return [];
 
@@ -107,7 +107,7 @@ const HabitDetails = () => {
         const today = new Date();
         let runningStreak = 0;
 
-        // Go from 29 days ago up to today
+        
         for (let i = 29; i >= 0; i--) {
             const date = new Date();
             date.setDate(today.getDate() - i);
@@ -149,7 +149,7 @@ const HabitDetails = () => {
                 className="max-w-5xl mx-auto bg-base-100 p-8 shadow-2xl rounded-xl"
             >
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Left Column: Image and Streak */}
+                    
                     <div className="lg:col-span-1 flex flex-col items-center">
                         <img 
                             src={habit.image || 'https://i.ibb.co/default-habit.jpg'} 
@@ -157,7 +157,7 @@ const HabitDetails = () => {
                             className="w-full max-h-72 object-cover rounded-lg shadow-xl mb-6"
                         />
                         
-                        {/* Streak Badge Display */}
+                        
                         <div className="p-4 bg-primary text-white rounded-lg text-center shadow-lg w-full">
                             <FaFire className="mx-auto text-3xl mb-2" />
                             <p className="text-xl font-bold">Current Streak</p>
@@ -166,7 +166,7 @@ const HabitDetails = () => {
                         </div>
                     </div>
                     
-                    {/* Right Column: Details and Actions */}
+                    
                     <div className="lg:col-span-2">
                         <h1 className="text-5xl font-extrabold text-habit-primary mb-4">
                             {habit.title}
@@ -182,7 +182,7 @@ const HabitDetails = () => {
                             </div>
                         </div>
 
-                        {/* Progress Bar */}
+                        
                         <div className="mb-8">
                             <h3 className="text-xl font-semibold mb-2">
                                 30-Day Progress ({progressPercent}%)
@@ -194,12 +194,13 @@ const HabitDetails = () => {
                             ></progress>
                         </div>
 
-                        {/* Streak Graph (Recharts) */}
+                        
                         <div className="mb-8">
                             <h3 className="text-xl font-semibold mb-3">
                                 Streak Trend (Last 30 Days)
                             </h3>
-                            <div className="w-full h-64 bg-base-200 rounded-lg p-3">
+                            <div className="w-full h-64 min-w-[200px] min-h-[200px] bg-base-200 rounded-lg p-3">
+
                                 <ResponsiveContainer width="100%" height="100%">
                                     <AreaChart data={streakChartData}>
                                         <defs>
@@ -235,14 +236,14 @@ const HabitDetails = () => {
                             </div>
                         </div>
                         
-                        {/* Creator Info */}
+                        
                         <div className="mb-8 p-4 border rounded-lg bg-base-200 shadow-inner">
                             <p className="font-semibold text-gray-800">Habit Creator</p>
                             <p className="text-sm">Name: {habit.creatorName}</p>
                             <p className="text-sm">Email: {habit.creatorEmail}</p>
                         </div>
 
-                        {/* Mark Complete Button - deep blue */}
+                        
                         <button 
                             onClick={handleMarkComplete} 
                             className="btn btn-lg text-white w-full border-none flex items-center justify-center gap-2"

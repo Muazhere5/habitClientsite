@@ -8,7 +8,7 @@ const UpdateHabitModal = ({ isOpen, setIsOpen, habit, refreshData }) => {
     const axiosInstance = useAxios();
     const [formData, setFormData] = useState({});
 
-    // ⬇️ Backend Data Initialization: Populates form with existing habit data
+    
     useEffect(() => {
         if (habit) {
             setFormData({
@@ -21,20 +21,18 @@ const UpdateHabitModal = ({ isOpen, setIsOpen, habit, refreshData }) => {
         }
     }, [habit]);
 
-    // ⬇️ Local state update: handles input edits
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    
     const handleUpdate = (e) => {
         e.preventDefault();
 
-        // ⬇️ Backend Connection: Sends PUT request to update habit
-        // API Route: PUT /update-habit/:id 
         axiosInstance.put(`/update-habit/${habit._id}`, formData)
             .then(res => {
-                // ⬇️ Backend Response: Checks MongoDB update results (modifiedCount)
                 if (res.data.modifiedCount > 0) {
                     toast.success('Habit updated successfully!');
                 } else if (res.data.matchedCount > 0) {
@@ -43,7 +41,7 @@ const UpdateHabitModal = ({ isOpen, setIsOpen, habit, refreshData }) => {
                     toast.error('Failed to update habit.');
                 }
                 setIsOpen(false);
-                refreshData();   // ⬇️ UI Update: Refreshes table after successful update
+                refreshData();
             })
             .catch(error => {
                 console.error("Habit update error:", error);
@@ -51,21 +49,18 @@ const UpdateHabitModal = ({ isOpen, setIsOpen, habit, refreshData }) => {
             });
     };
 
-    // Don’t render modal at all when closed or no habit selected
     if (!isOpen || !habit) return null;
 
     return (
-        <dialog
-            id="update_modal"
-            className="modal modal-open"
-        >
+        <dialog id="update_modal" className="modal modal-open">
             <div className="modal-box w-11/12 max-w-2xl shadow-2xl">
                 <h3 className="font-bold text-2xl text-habit-primary mb-4">
                     Update Habit: {habit?.title}
                 </h3>
-                
+
                 <form onSubmit={handleUpdate} className="space-y-4">
-                    {/* Title */}
+
+                    
                     <div className="form-control">
                         <label className="label mb-2">
                             <span className="label-text font-semibold">Habit Title</span>
@@ -81,7 +76,7 @@ const UpdateHabitModal = ({ isOpen, setIsOpen, habit, refreshData }) => {
                         />
                     </div>
 
-                    {/* Description */}
+                    
                     <div className="form-control">
                         <label className="label mb-2">
                             <span className="label-text font-semibold">Description</span>
@@ -96,7 +91,7 @@ const UpdateHabitModal = ({ isOpen, setIsOpen, habit, refreshData }) => {
                         />
                     </div>
 
-                    {/* Category + Reminder Time */}
+                    
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="form-control">
                             <label className="label mb-2">
@@ -110,9 +105,7 @@ const UpdateHabitModal = ({ isOpen, setIsOpen, habit, refreshData }) => {
                                 required
                             >
                                 {categories.map(cat => (
-                                    <option key={cat} value={cat}>
-                                        {cat}
-                                    </option>
+                                    <option key={cat} value={cat}>{cat}</option>
                                 ))}
                             </select>
                         </div>
@@ -132,7 +125,7 @@ const UpdateHabitModal = ({ isOpen, setIsOpen, habit, refreshData }) => {
                         </div>
                     </div>
 
-                    {/* Image URL */}
+                    
                     <div className="form-control">
                         <label className="label mb-2">
                             <span className="label-text font-semibold">Image URL (Optional)</span>
@@ -148,31 +141,33 @@ const UpdateHabitModal = ({ isOpen, setIsOpen, habit, refreshData }) => {
                     </div>
 
                     <p className="text-sm text-gray-500 mb-2">
-                        {/* ⬇️ Backend Data Usage: Read-only creator info */}
                         Creator: {habit?.creatorName} | Email: {habit?.creatorEmail} (Cannot be edited)
                     </p>
 
-                    <div className="modal-action">
+                    
+                    <div className="modal-action flex justify-end gap-4 mt-6">
+
                         <button
                             type="button"
                             onClick={() => setIsOpen(false)}
-                            className="btn text-white border-none"
+                            className="btn text-white border-none text-lg px-6 py-3 rounded-lg"
                             style={{ backgroundColor: '#1A56DB' }}
                         >
                             Cancel
                         </button>
+
                         <button
                             type="submit"
-                            className="btn text-white border-none"
+                            className="btn text-white border-none text-lg px-8 py-3 rounded-lg"
                             style={{ backgroundColor: '#1A56DB' }}
                         >
                             Update Habit
                         </button>
+
                     </div>
                 </form>
             </div>
 
-            {/* Backdrop – closes modal on click */}
             <form method="dialog" className="modal-backdrop">
                 <button onClick={() => setIsOpen(false)}>close</button>
             </form>

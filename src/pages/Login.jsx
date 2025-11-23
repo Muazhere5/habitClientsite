@@ -26,7 +26,7 @@ const Login = () => {
                 navigate(from, { replace: true });
             })
             .catch(error => {
-                // This catch runs, but now the loading state is safely reset inside AuthProvider
+                
                 const errorMessage = error.message.includes('auth/invalid-credential')
                     ? 'Invalid email or password. Please check your credentials.'
                     : 'Login failed. Please try again.';
@@ -57,7 +57,7 @@ const Login = () => {
 
                 <form onSubmit={handleLogin} className="card-body px-2">
 
-                    {/* Title */}
+                    
                     <h2
                         className="text-3xl font-extrabold text-center tracking-wide mb-12"
                         style={{ color: "#1A56DB" }}
@@ -65,10 +65,10 @@ const Login = () => {
                         Login to Habit Tracker
                     </h2>
 
-                    {/* Email */}
+                    
                     <div className="form-control mb-10">
 
-                        {/* Label spacing fix */}
+                       
                         <div className="mb-3">
                             <label className="label pb-2">
                                 <span className="label-text font-semibold text-base">
@@ -77,7 +77,7 @@ const Login = () => {
                             </label>
                         </div>
 
-                        {/* Input field */}
+                        
                         <div>
                             <input
                                 type="email"
@@ -89,10 +89,10 @@ const Login = () => {
                         </div>
                     </div>
 
-                    {/* Password */}
+                    
                     <div className="form-control mb-10">
 
-                        {/* Label spacing fix */}
+                        
                         <div className="mb-3">
                             <label className="label pb-2">
                                 <span className="label-text font-semibold text-base">
@@ -101,7 +101,7 @@ const Login = () => {
                             </label>
                         </div>
 
-                        {/* Input field */}
+                       
                         <div>
                             <input
                                 type="password"
@@ -113,12 +113,12 @@ const Login = () => {
                         </div>
                     </div>
 
-                    {/* Error Message */}
+                    
                     {loginError && (
                         <p className="text-error text-center mb-4 font-medium">{loginError}</p>
                     )}
 
-                    {/* Login Button */}
+                    
                     <div className="form-control mt-2 mb-10">
                         <button
                             type="submit"
@@ -134,10 +134,10 @@ const Login = () => {
                         </button>
                     </div>
 
-                    {/* Divider */}
+                    
                     <div className="divider my-8">OR</div>
 
-                    {/* Google Login */}
+                    
                     <div className="form-control mb-6">
                         <button
                             type="button"
@@ -148,7 +148,7 @@ const Login = () => {
                         </button>
                     </div>
 
-                    {/* Signup Link */}
+                    
                     <p className="text-center mt-4 text-sm">
                         Don't have an account?{" "}
                         <Link

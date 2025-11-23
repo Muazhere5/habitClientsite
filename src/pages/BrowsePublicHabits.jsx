@@ -15,7 +15,7 @@ const BrowsePublicHabits = () => {
     const [suggestions, setSuggestions] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
 
-    // Fetch data based on current filter/search state
+    
     useEffect(() => {
         setLoading(true);
         const queryParams = new URLSearchParams();
@@ -82,7 +82,7 @@ const BrowsePublicHabits = () => {
                 Browse All Public Habits
             </h1>
             
-            {/* Search and Filter Controls */}
+            
             <motion.div 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -91,7 +91,7 @@ const BrowsePublicHabits = () => {
                 <form onSubmit={handleSearchSubmit} className="w-full">
                     <div className="flex flex-row flex-wrap gap-4 items-center">
                         
-                        {/* Search Input + Button */}
+                        
                         <div className="relative flex-[2] min-w-[260px]">
                             <div className="flex w-full gap-2 items-center">
                                 <input 
@@ -110,7 +110,7 @@ const BrowsePublicHabits = () => {
                                 </button>
                             </div>
 
-                            {/* Suggestions */}
+                            
                             {suggestions.length > 0 && searchInput.trim() && (
                                 <ul className="absolute z-20 mt-1 w-full bg-base-100 border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto">
                                     {suggestions.map(s => (
@@ -126,7 +126,7 @@ const BrowsePublicHabits = () => {
                             )}
                         </div>
 
-                        {/* Category Filter (smaller box now) */}
+                        
                         <div className="form-control flex-[0.5] min-w-[140px]">
                             <label className="label hidden md:block">
                                 <span className="label-text font-semibold">Filter:</span>
@@ -146,7 +146,7 @@ const BrowsePublicHabits = () => {
                 </form>
             </motion.div>
 
-            {/* Habit Grid */}
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {publicHabits.length > 0 ? (
                     publicHabits.map(habit => (

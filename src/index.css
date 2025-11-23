@@ -5,11 +5,11 @@
 @tailwind utilities;
 
 body {
-  /* Use a modern default font set */
+  
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-/* Custom class for the loading indicator to meet the assignment requirement */
+
 .loading-indicator {
   min-height: 100vh;
   display: flex;
@@ -17,7 +17,7 @@ body {
   justify-content: center;
 }
 
-/* Ensure the root div takes full height for consistent footer placement */
+
 #root {
   min-height: 100vh;
   display: flex;

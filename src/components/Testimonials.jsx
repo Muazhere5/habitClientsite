@@ -2,11 +2,9 @@ import React from 'react';
 import { FaQuoteLeft } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
-// ⬇️ LOCAL IMAGE IMPORTS (Keep commented out until local files are saved)
-// import ProfileOne from '../assets/profile_1.jpg'; // [Image: profile_1.jpg]
-// import ProfileTwo from '../assets/profile_2.jpg'; // [Image: profile_2.jpg]
 
-// ⬇️ DEMO URL PICTURES for Avatars (Replaces local imports for easy startup)
+
+
 const AVATAR_URL_1 = 'https://i.pravatar.cc/150?img=1'; 
 const AVATAR_URL_2 = 'https://i.pravatar.cc/150?img=6'; 
 
@@ -15,19 +13,19 @@ const testimonialData = [
         quote: "Since tracking my 'Deep Work' habit here, my focus time has doubled. This app is simple and effective.", 
         name: "Jessica P.", 
         habit: "Deep Work Sprint",
-        avatar: AVATAR_URL_1 // Using Demo URL 1
+        avatar: AVATAR_URL_1 
     },
     { 
         quote: "The streak counter is the motivation I never knew I needed! It pushed me to hit my 100th day of exercise.", 
         name: "Mark T.", 
         habit: "Resistance Training",
-        avatar: AVATAR_URL_2 // Using Demo URL 2
+        avatar: AVATAR_URL_2 
     },
     { 
         quote: "Easy to use and the Mark Complete feature updates instantly. My mornings are completely transformed!", 
         name: "Sofia A.", 
         habit: "Mindful Morning Stretch",
-        avatar: AVATAR_URL_1 // Using Demo URL 1
+        avatar: AVATAR_URL_1 
     },
 ];
 
@@ -50,7 +48,7 @@ const Testimonials = () => {
                         <FaQuoteLeft className="text-3xl text-habit-primary/30 mb-4" />
                         <p className="italic text-gray-700 flex-grow mb-4">"{t.quote}"</p>
                         <div className="mt-4 border-t pt-3 flex items-center">
-                            {/* ⬇️ Image Usage: Uses the avatar URL from the testimonial data (demo URL) */}
+                           
                             <img 
                                 src={t.avatar} 
                                 alt={t.name} 

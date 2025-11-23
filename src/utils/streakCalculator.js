@@ -1,14 +1,14 @@
-// Utility function to check if two dates are consecutive days (ignoring time)
+
 const isConsecutive = (date1, date2) => {
     const d1 = new Date(date1);
     const d2 = new Date(date2);
     
-    // Set both to midnight to compare days accurately
+    
     d1.setHours(0, 0, 0, 0);
     d2.setHours(0, 0, 0, 0);
 
     const oneDay = 24 * 60 * 60 * 1000;
-    // Difference should be exactly one day (date1 is 1 day after date2)
+   
     const diffDays = Math.round((d1.getTime() - d2.getTime()) / oneDay);
     
     return diffDays === 1; 
@@ -22,7 +22,7 @@ const isConsecutive = (date1, date2) => {
 export const calculateCurrentStreak = (completionHistory = []) => {
     if (completionHistory.length === 0) return 0;
 
-    // 1. Sort history descending (newest first) and get unique days
+    
     const uniqueCompletionDates = [];
     const uniqueDays = new Set();
     
@@ -51,15 +51,15 @@ export const calculateCurrentStreak = (completionHistory = []) => {
     const oneDay = 24 * 60 * 60 * 1000;
     const diffDaysFromToday = Math.round((today.getTime() - latestDay.getTime()) / oneDay);
 
-    // If the latest completion was today (0) or yesterday (1), the streak is alive.
+    
     if (diffDaysFromToday > 1) {
-        return 0; // Streak is broken.
+        return 0; 
     }
     
-    // Start counting the streak
+    
     streak = 1;
     
-    // Iterate through the rest of the unique completion dates
+    
     for (let i = 1; i < uniqueCompletionDates.length; i++) {
         const previousDate = uniqueCompletionDates[i - 1];
         const currentDateToCheck = uniqueCompletionDates[i];
@@ -67,7 +67,7 @@ export const calculateCurrentStreak = (completionHistory = []) => {
         if (isConsecutive(previousDate, currentDateToCheck)) {
             streak++;
         } else {
-            // Streak is broken
+            
             break;
         }
     }

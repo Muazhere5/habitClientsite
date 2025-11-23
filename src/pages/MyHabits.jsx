@@ -4,10 +4,10 @@ import { AuthContext } from '../providers/AuthProvider';
 import LoadingSpinner from '../components/LoadingSpinner';
 import toast from 'react-hot-toast';
 import UpdateHabitModal from '../components/UpdateHabitModal';
-import Swal from 'sweetalert2'; // Using SweetAlert for confirmation
-import { Link } from 'react-router-dom'; // Needed for "Start Building a New Habit" button
+import Swal from 'sweetalert2'; 
+import { Link } from 'react-router-dom'; 
 
-// Small placeholder image if habit.image is missing
+
 const HabitPlaceholder =
   'https://via.placeholder.com/80x80?text=Habit';
 
@@ -42,7 +42,7 @@ const MyHabits = () => {
     }
   }, [user, userLoading, fetchMyHabits]);
 
-  // Handler for Delete button (DELETE /habit/:id)
+  
   const handleDelete = (id) => {
     Swal.fire({
       title: 'Confirm Deletion?',
@@ -59,7 +59,7 @@ const MyHabits = () => {
           .then((res) => {
             if (res.data.deletedCount > 0) {
               Swal.fire('Deleted!', 'Your habit has been deleted.', 'success');
-              fetchMyHabits(); // Update UI instantly
+              fetchMyHabits(); 
             } else {
               toast.error('Delete failed.');
             }
@@ -72,13 +72,13 @@ const MyHabits = () => {
     });
   };
 
-  // Handler to open the Update Modal
+  
   const handleOpenUpdateModal = (habit) => {
     setSelectedHabit(habit);
     setIsModalOpen(true);
   };
 
-  // Handler to mark habit complete (PATCH /habit/complete/:id)
+  
   const handleMarkComplete = (id) => {
     axiosInstance
       .patch(`/habit/complete/${id}`)
@@ -104,7 +104,7 @@ const MyHabits = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
-      {/* Top header: title + quick stats + action */}
+      
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl md:text-4xl font-extrabold text-habit-primary mb-2">
@@ -116,7 +116,7 @@ const MyHabits = () => {
         </div>
 
         <div className="flex flex-col md:items-end gap-2">
-          {/* Count badge */}
+          
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100">
             <span className="text-sm font-semibold text-gray-600">Total Habits</span>
             <span
@@ -127,7 +127,7 @@ const MyHabits = () => {
             </span>
           </div>
 
-          {/* Add Habit button */}
+          
           <Link
             to="/add-habit"
             className="mt-1 inline-flex items-center justify-center rounded-md text-white font-semibold px-5 py-2 text-sm md:text-base shadow-md hover:shadow-lg transition"
@@ -138,7 +138,7 @@ const MyHabits = () => {
         </div>
       </div>
 
-      {/* Habit list / cards */}
+      
       {myHabits.length > 0 ? (
         <div className="bg-base-100 rounded-2xl shadow-2xl border border-slate-200 p-4 md:p-6">
           <div className="mb-4 flex items-center justify-between flex-wrap gap-2">
@@ -161,7 +161,7 @@ const MyHabits = () => {
                   key={habit._id}
                   className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 py-4 px-3 rounded-xl border border-slate-100 bg-white hover:shadow-md transition"
                 >
-                  {/* Left: image + info */}
+                  
                   <div className="flex items-start gap-4">
                     <img
                       src={habit.image || HabitPlaceholder}
@@ -191,7 +191,7 @@ const MyHabits = () => {
                     </div>
                   </div>
 
-                  {/* Right: actions */}
+                  
                   <div className="flex flex-wrap gap-2 md:gap-3">
                     <button
                       type="button"
@@ -214,7 +214,7 @@ const MyHabits = () => {
                       type="button"
                       onClick={() => handleMarkComplete(habit._id)}
                       className="px-4 py-2 rounded-md text-sm font-semibold text-white shadow-sm hover:shadow-md transition"
-                      style={{ backgroundColor: '#16A34A' }} // green for complete
+                      style={{ backgroundColor: '#16A34A' }} 
                     >
                       Mark Complete
                     </button>
@@ -242,7 +242,7 @@ const MyHabits = () => {
         </div>
       )}
 
-      {/* Update Modal (logic unchanged) */}
+     
       <UpdateHabitModal
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}

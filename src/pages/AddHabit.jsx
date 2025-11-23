@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AddHabit = () => {
     const { user } = useContext(AuthContext);
-    const axiosInstance = useAxios(); // Backend: custom Axios instance configured with API base URL / interceptors
+    const axiosInstance = useAxios(); 
     const navigate = useNavigate();
 
     const categories = ['Morning', 'Work', 'Fitness', 'Evening', 'Study'];
@@ -16,7 +16,7 @@ const AddHabit = () => {
 
         const form = e.target;
 
-        // Backend: this object is what we send to the API to be stored in the database
+        
         const habitData = {
             title: form.title.value,
             description: form.description.value,
@@ -35,10 +35,10 @@ const AddHabit = () => {
             return;
         }
 
-        // Backend: POST request that actually creates/saves the habit on the server
+        
         axiosInstance.post('/add-habit', habitData)
             .then(res => {
-                // Backend: server responds with insertedId if the habit was successfully stored
+               
                 if (res.data.insertedId) {
                     toast.success('Habit added successfully! Start tracking your streak.');
                     form.reset();
@@ -61,7 +61,7 @@ const AddHabit = () => {
                         Add a New Habit
                     </h2>
 
-                    {/* Habit Title */}
+                   
                     <div className="form-control mb-5">
                         <div className="mb-2">
                             <label className="label">
@@ -79,7 +79,7 @@ const AddHabit = () => {
                         </div>
                     </div>
 
-                    {/* Description */}
+                    
                     <div className="form-control mb-5">
                         <div className="mb-2">
                             <label className="label">
@@ -97,7 +97,7 @@ const AddHabit = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Category Dropdown */}
+                       
                         <div className="form-control mb-3">
                             <div className="mb-2">
                                 <label className="label">
@@ -118,7 +118,7 @@ const AddHabit = () => {
                             </div>
                         </div>
                         
-                        {/* Reminder Time Picker */}
+                        
                         <div className="form-control mb-3">
                             <div className="mb-2">
                                 <label className="label">
@@ -136,7 +136,7 @@ const AddHabit = () => {
                         </div>
                     </div>
 
-                    {/* Image URL */}
+                    
                     <div className="form-control mb-5">
                         <div className="mb-2">
                             <label className="label">
@@ -154,7 +154,7 @@ const AddHabit = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Read-only User Info: Name */}
+                        
                         <div className="form-control mb-3">
                             <div className="mb-2">
                                 <label className="label">
@@ -171,7 +171,7 @@ const AddHabit = () => {
                             </div>
                         </div>
 
-                        {/* Read-only User Info: Email */}
+                        
                         <div className="form-control mb-3">
                             <div className="mb-2">
                                 <label className="label">
@@ -189,12 +189,12 @@ const AddHabit = () => {
                         </div>
                     </div>
 
-                    {/* Submit Button */}
+                    
                     <div className="form-control mt-6">
                         <button
                             type="submit"
                             className="btn text-white text-lg py-3 border-none w-full"
-                            style={{ backgroundColor: "#1A56DB" }} // Deep blue like rest of project
+                            style={{ backgroundColor: "#1A56DB" }} 
                         >
                             Add Habit
                         </button>

@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
       <RouterProvider router={router} /> 
-      {/* Global Toaster setup for success/error messages */}
+      
       <Toaster position="top-center" reverseOrder={false} />
     </AuthProvider>
   </React.StrictMode>,

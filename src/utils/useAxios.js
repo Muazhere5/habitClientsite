@@ -1,53 +1,54 @@
+// src/utils/useAxios.js
 import axios from "axios";
-import { getAuth } from "firebase/auth"; 
-import { useEffect } from 'react'; // 👈 CRITICAL: Import useEffect for memoization
+import { useEffect, useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider"; // 👈 use context user
 
-// Base instance creation (outside the hook to ensure it's only done once)
+// Single Axios instance
 const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
-    withCredentials: true, 
-    headers: { 'Content-Type': 'application/json' }
+  baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true,
+  headers: { "Content-Type": "application/json" },
 });
 
 const useAxios = () => {
+  const { user } = useContext(AuthContext);
 
-    // ⬇️ CRITICAL FIX: Use useEffect to add the interceptor only ONCE
-    useEffect(() => {
-        
-        // Check if the interceptor has already been added to prevent duplication
-        if (axiosInstance.interceptors.request.handlers.length > 0) {
-            return; // Exit if already configured
+  useEffect(() => {
+    
+    const interceptor = axiosInstance.interceptors.request.use(
+      async (config) => {
+        if (!user) {
+          console.log("🔒 No user from AuthContext: sending request WITHOUT Authorization header");
+          return config;
         }
-        
-        const interceptor = axiosInstance.interceptors.request.use(async (config) => {
-            const auth = getAuth();
-            const user = auth.currentUser; 
 
-            // Only run logic for authenticated users on secured routes
-            if (user) {
-                try {
-                    const token = await user.getIdToken(true); 
-                    // ⬇️ Attach token to the Authorization header
-                    config.headers.Authorization = `Bearer ${token}`;
-                } catch (error) {
-                    console.error("Failed to get Firebase token for Axios:", error);
-                    // On failure, remove Authorization header to avoid infinite loop
-                    delete config.headers.Authorization; 
-                }
-            }
-            return config;
-        }, (error) => {
-            return Promise.reject(error);
-        });
+        try {
+          
+          const token = await user.getIdToken(true);
 
-        // Optional Cleanup function (removes the interceptor when component unmounts)
-        return () => {
-             axiosInstance.interceptors.request.eject(interceptor);
-        };
+          if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+            console.log("✅ Attached Firebase token from AuthContext user");
+          } else {
+            console.warn("⚠️ Could not get Firebase token from user");
+          }
+        } catch (error) {
+          console.error("❌ Failed to get Firebase token for Axios:", error);
+          delete config.headers.Authorization;
+        }
 
-    }, []); // Empty dependency array ensures this runs only once
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
 
-    return axiosInstance;
+    
+    return () => {
+      axiosInstance.interceptors.request.eject(interceptor);
+    };
+  }, [user]); 
+
+  return axiosInstance;
 };
 
 export default useAxios;

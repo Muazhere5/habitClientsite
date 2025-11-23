@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import Header from './components/Header'; // The Navbar
+import Header from './components/Header'; 
 import Footer from './components/Footer';
 
 const App = () => {
     const location = useLocation();
 
-    // Assignment Requirement: Dynamic Document Title
+   
     useEffect(() => {
         const path = location.pathname;
         let title = 'Habit Builder | Consistency Starts Here'; 
@@ -32,20 +32,20 @@ const App = () => {
         document.title = title;
     }, [location.pathname]);
 
-    // Check if we are on the 404 path to conditionally hide Header/Footer
+    
     const isNotFound = location.pathname === '/404'; 
 
     return (
         <div className="min-h-screen flex flex-col bg-base-100">
-            {/* Header (Navbar) - Hide on 404 */}
+            
             {!isNotFound && <Header />}
             
             <main className="flex-grow">
-                {/* Outlet renders the specific Page component */}
+                
                 <Outlet />
             </main>
             
-            {/* Footer - Hide on 404 */}
+            
             {!isNotFound && <Footer />}
         </div>
     );
