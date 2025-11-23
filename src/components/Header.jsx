@@ -13,7 +13,7 @@ const Header = () => {
         <>
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/browse">Browse Public Habits</NavLink></li>
-            <li><NavLink to="/add-habit">Add Habits</NavLink></li>
+            <li><NavLink to="/add-habit">Add Habit</NavLink></li>
             <li><NavLink to="/my-habits">My Habits</NavLink></li>
         </>
     );
